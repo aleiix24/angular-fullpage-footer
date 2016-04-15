@@ -5,9 +5,9 @@
     .module('fullPage.js', [])
     .directive('fullPage', fullPage);
 
-  fullPage.$inject = ['$timeout', '$rootScope'];
+  fullPage.$inject = ['$timeout', '$rootScope', '$window'];
 
-  function fullPage($timeout, $rootScope) {
+  function fullPage($timeout, $rootScope, $window) {
     var directive = {
       restrict: 'A',
       scope: {options: '='},
@@ -22,8 +22,7 @@
 
       var rebuild = function() {
         destroyFullPage();
-
-        angular.element(element).fullpage(sanatizeOptions(scope.options));
+        if (angular.element($window).width() > 800) angular.element(element).fullpage(sanatizeOptions(scope.options));
       };
 
       var destroyFullPage = function() {
@@ -68,7 +67,7 @@
       var watchNodes = function() {
         return element[0].getElementsByTagName('*').length;
       };
-
+      angular.element($window).bind('resize', rebuild);
       scope.$watch(watchNodes, rebuild);
 
       scope.$watch('options', rebuild, true);
