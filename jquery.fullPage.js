@@ -1363,8 +1363,6 @@
                 if (v.sectionIndex == options.footerIndex) {
                   var footer_a = $('#section-footer').height(),
                       footer_h = $('#footer').height();
-                      console.log(footer_a);
-                      console.log(footer_h);
                   var translate3d = 'translate3d(0px, -' + (v.dtop - footer_a + footer_h + 90) + 'px, 0px)';
                 } else {
                     var translate3d = 'translate3d(0px, -' + v.dtop + 'px, 0px)';
