@@ -1360,7 +1360,15 @@
         function performMovement(v){
             // using CSS3 translate functionality
             if (options.css3 && options.autoScrolling && !options.scrollBar) {
-                var translate3d = 'translate3d(0px, -' + v.dtop + 'px, 0px)';
+                if (v.sectionIndex == options.footerIndex) {
+                  var footer_a = $('#section-footer').height(),
+                      footer_h = $('#footer').height();
+                      console.log(footer_a);
+                      console.log(footer_h);
+                  var translate3d = 'translate3d(0px, -' + (v.dtop - footer_a + footer_h + 90) + 'px, 0px)';
+                } else {
+                    var translate3d = 'translate3d(0px, -' + v.dtop + 'px, 0px)';
+                }
                 transformContainer(translate3d, true);
 
                 //even when the scrollingSpeed is 0 there's a little delay, which might cause the
@@ -2059,7 +2067,7 @@
         }
 
         function getTableHeight(element){
-            var sectionHeight = windowsHeight;
+            var sectionHeight = windowsHeight - 90;
 
             if(options.paddingTop || options.paddingBottom){
                 var section = element;
@@ -2282,29 +2290,7 @@
         * http://stackoverflow.com/questions/5661671/detecting-transform-translate3d-support
         */
         function support3d() {
-            var el = document.createElement('p'),
-                has3d,
-                transforms = {
-                    'webkitTransform':'-webkit-transform',
-                    'OTransform':'-o-transform',
-                    'msTransform':'-ms-transform',
-                    'MozTransform':'-moz-transform',
-                    'transform':'transform'
-                };
-
-            // Add it to the body to get the computed style.
-            document.body.insertBefore(el, null);
-
-            for (var t in transforms) {
-                if (el.style[t] !== undefined) {
-                    el.style[t] = 'translate3d(1px,1px,1px)';
-                    has3d = window.getComputedStyle(el).getPropertyValue(transforms[t]);
-                }
-            }
-
-            document.body.removeChild(el);
-
-            return (has3d !== undefined && has3d.length > 0 && has3d !== 'none');
+            return Modernizr.csstransforms3d;
         }
 
         /**
