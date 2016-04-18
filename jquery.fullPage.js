@@ -2065,7 +2065,7 @@
         }
 
         function getTableHeight(element){
-            var sectionHeight = windowsHeight - 90;
+            var sectionHeight = windowsHeight;
 
             if(options.paddingTop || options.paddingBottom){
                 var section = element;
