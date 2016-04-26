@@ -70,7 +70,7 @@
       element.bind('resize', function(){
         $timeout(function(){
           rebuild();
-        }, 500);
+        }, 100);
       });
       scope.$watch(watchNodes, rebuild);
 
