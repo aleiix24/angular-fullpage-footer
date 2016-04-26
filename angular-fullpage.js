@@ -67,7 +67,11 @@
       var watchNodes = function() {
         return element[0].getElementsByTagName('*').length;
       };
-      angular.element($window).bind('resize', rebuild);
+      element.bind('resize', function(){
+        $timeout(function(){
+          rebuild();
+        }, 500);
+      });
       scope.$watch(watchNodes, rebuild);
 
       scope.$watch('options', rebuild, true);
