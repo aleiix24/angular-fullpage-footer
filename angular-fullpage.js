@@ -5,9 +5,9 @@
     .module('fullPage.js', [])
     .directive('fullPage', fullPage);
 
-  fullPage.$inject = ['$timeout', '$rootScope', '$window'];
+  fullPage.$inject = ['$timeout', '$rootScope', '$window', '$document'];
 
-  function fullPage($timeout, $rootScope, $window) {
+  function fullPage($timeout, $rootScope, $window, $document) {
     var directive = {
       restrict: 'A',
       scope: {options: '='},
@@ -19,6 +19,7 @@
     function link(scope, element) {
       var pageIndex;
       var slideIndex;
+      var windowEl = angular.element($window);
 
       var rebuild = function() {
         destroyFullPage();
@@ -29,6 +30,12 @@
         if ($.fn.fullpage.destroy) {
           $.fn.fullpage.destroy('all');
         }
+      };
+      var destroyFullPageAndUnBind = function() {
+        windowEl.unbind('resize');
+        $timeout(function(){
+          destroyFullPage();  
+        }, 20);
       };
 
       var sanatizeOptions = function(options) {
@@ -67,16 +74,16 @@
       var watchNodes = function() {
         return element[0].getElementsByTagName('*').length;
       };
-      element.bind('resize', function(){
+      var resizeEvent = windowEl.bind('resize', function(){
         $timeout(function(){
           rebuild();
-        }, 100);
+        }, 10);
       });
       scope.$watch(watchNodes, rebuild);
 
       scope.$watch('options', rebuild, true);
 
-      element.on('$destroy', destroyFullPage);
+      element.on('$destroy', destroyFullPageAndUnBind);
     }
   }
 
