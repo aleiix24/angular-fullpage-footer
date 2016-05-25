@@ -84,6 +84,13 @@
       scope.$watch('options', rebuild, true);
 
       element.on('$destroy', destroyFullPageAndUnBind);
+
+      $rootScope.$on('disableScrollEvent', function(){
+        $.fn.fullpage.setAllowScrolling(false);
+      });
+      $rootScope.$on('enableScrollEvent', function(){
+        $.fn.fullpage.setAllowScrolling(true);
+      });
     }
   }
 
