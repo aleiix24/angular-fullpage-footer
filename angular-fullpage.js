@@ -34,7 +34,7 @@
       var destroyFullPageAndUnBind = function() {
         windowEl.unbind('resize');
         $timeout(function(){
-          destroyFullPage();  
+          destroyFullPage();
         }, 20);
       };
 
@@ -74,11 +74,11 @@
       var watchNodes = function() {
         return element[0].getElementsByTagName('*').length;
       };
-      var resizeEvent = windowEl.bind('resize', function(){
+      /*var resizeEvent = windowEl.bind('resize', function(){
         $timeout(function(){
           rebuild();
         }, 10);
-      });
+      });*/
       scope.$watch(watchNodes, rebuild);
 
       scope.$watch('options', rebuild, true);
