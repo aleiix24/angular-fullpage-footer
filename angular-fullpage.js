@@ -33,7 +33,7 @@
       var destroyFullPageAndUnBind = function() {
         $timeout(function(){
           destroyFullPage();
-        }, 100);
+        }, 200);
       };
 
       var sanatizeOptions = function(options) {
@@ -77,7 +77,9 @@
           rebuild();
         }, 10);
       });*/
-      scope.$watch(watchNodes, rebuild);
+      //scope.$watch(watchNodes, rebuild);
+
+      scope.$watch('options', rebuild, true);
 
       element.on('$destroy', destroyFullPageAndUnBind);
 
