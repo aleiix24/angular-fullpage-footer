@@ -19,7 +19,6 @@
     function link(scope, element) {
       var pageIndex;
       var slideIndex;
-      var windowEl = angular.element($window);
 
       var rebuild = function() {
         destroyFullPage();
@@ -32,10 +31,9 @@
         }
       };
       var destroyFullPageAndUnBind = function() {
-        windowEl.unbind('resize');
         $timeout(function(){
           destroyFullPage();
-        }, 20);
+        }, 100);
       };
 
       var sanatizeOptions = function(options) {
@@ -80,8 +78,6 @@
         }, 10);
       });*/
       scope.$watch(watchNodes, rebuild);
-
-      scope.$watch('options', rebuild, true);
 
       element.on('$destroy', destroyFullPageAndUnBind);
 
