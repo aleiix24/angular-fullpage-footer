@@ -125,10 +125,10 @@
 
             //scrolling
             css3: true,
-            scrollingSpeed: 700,
+            scrollingSpeed: 1000,
             autoScrolling: true,
             fitToSection: true,
-            fitToSectionDelay: 1000,
+            fitToSectionDelay: 0,
             easing: 'easeInOutCubic',
             easingcss3: 'ease',
             loopBottom: false,
@@ -145,7 +145,7 @@
             scrollOverflowHandler: iscrollHandler,
             scrollOverflowOptions: null,
             touchSensitivity: 5,
-            normalScrollElementTouchThreshold: 5,
+            normalScrollElementTouchThreshold: 0,
             bigSectionsDestination: null,
 
             //Accessibility
