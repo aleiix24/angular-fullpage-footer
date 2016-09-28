@@ -77,7 +77,7 @@
           rebuild();
         }, 10);
       });*/
-      //scope.$watch(watchNodes, rebuild);
+      scope.$watch(watchNodes, rebuild, true);
 
       scope.$watch('options', rebuild, true);
 
